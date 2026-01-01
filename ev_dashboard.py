@@ -5,7 +5,7 @@ import plotly.express as px
 # Load data
 @st.cache_data
 def load_data():
-    df = pd.read_csv(r"C:\Users\Abinaya\Downloads\archive (2).zip")
+    df = pd.read_csv("archive (2).zip")
     df.columns = df.columns.str.strip().str.replace(" ", "_").str.lower()
     df = df.rename(columns={"ev_sales_quantity": "sales"})
     df['sales'] = pd.to_numeric(df['sales'], errors='coerce')
@@ -69,3 +69,4 @@ if 'month_name' in filtered_df.columns:
     monthly_sales = filtered_df.groupby('month_name')['sales'].sum().reindex(month_order).reset_index()
     fig_month = px.bar(monthly_sales, x='month_name', y='sales', title='Monthly EV Sales')
     st.plotly_chart(fig_month, use_container_width=True)
+
